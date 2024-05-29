@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -30,7 +29,6 @@ const createUserFormSchema = z.object({
 });
 
 const App = () => {
-  const [output, setOutput] = useState("");
   const {
     register,
     handleSubmit,
@@ -40,54 +38,74 @@ const App = () => {
   });
 
   function createUser(data) {
-    setOutput(JSON.stringify(data, null, 2));
+    console.log(JSON.stringify(data));
   }
 
   return (
-    <main className="h-screen bg-zinc-400 flex flex-col gap-10 items-center justify-center">
+    <main className="h-screen min-h-screen bg-zinc-800 flex flex-col gap-10 items-center justify-center">
       <form
         onSubmit={handleSubmit(createUser)}
         className="flex flex-col gap-4 w-full max-w-xs"
       >
         <div className="flex flex-col gap-1">
-          <label className="text-zinc-800 text-lg" htmlFor="name">Nome</label>
+          <label className="text-zinc-300 text-lg" htmlFor="name">
+            Nome
+          </label>
           <input
             type="text"
             className="border border-zinc-800 shadow-sm rounded h-10 bg-zinc-600 text-white px-3"
             {...register("name")}
           />
-          {errors.name && <span className="text-red-600 text-sm">{errors.name.message}</span>}
+          {errors.name && (
+            <span className="text-red-600 text-sm">{errors.name.message}</span>
+          )}
         </div>
 
         <div className="flex flex-col gap-1">
-          <label className="text-zinc-800 text-lg" htmlFor="email">Email</label>
+          <label className="text-zinc-300 text-lg" htmlFor="email">
+            Email
+          </label>
           <input
             type="email"
             className="border border-zinc-800 shadow-sm rounded h-10 bg-zinc-600 text-white px-3"
             {...register("email")}
           />
-          {errors.email && <span className="text-red-600 text-sm">{errors.email.message}</span>}
+          {errors.email && (
+            <span className="text-red-600 text-sm">{errors.email.message}</span>
+          )}
         </div>
 
         <div className="flex flex-col gap-1">
-          <label className="text-zinc-800 text-lg" htmlFor="subject">Assunto</label>
+          <label className="text-zinc-300 text-lg" htmlFor="subject">
+            Assunto
+          </label>
           <input
             type="text"
             className="border border-zinc-800 shadow-sm rounded h-10 bg-zinc-600 text-white px-3"
             {...register("subject")}
           />
-          {errors.subject && <span className="text-red-600 text-sm">{errors.subject.message}</span>}
+          {errors.subject && (
+            <span className="text-red-600 text-sm">
+              {errors.subject.message}
+            </span>
+          )}
         </div>
 
         <div className="flex flex-col gap-1">
-          <label className="text-zinc-800 text-lg" htmlFor="message">Mensagem</label>
+          <label className="text-zinc-300 text-lg" htmlFor="message">
+            Mensagem
+          </label>
           <textarea
             cols="30"
             rows="10"
             className="border border-zinc-800 shadow-sm rounded px-3 bg-zinc-600 text-white"
             {...register("message")}
           ></textarea>
-          {errors.message && <span className="text-red-600 text-sm">{errors.message.message}</span>}
+          {errors.message && (
+            <span className="text-red-600 text-sm">
+              {errors.message.message}
+            </span>
+          )}
         </div>
 
         <button
@@ -97,8 +115,6 @@ const App = () => {
           Enviar
         </button>
       </form>
-
-      <pre>{output}</pre>
     </main>
   );
 };
